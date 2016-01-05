@@ -6,7 +6,7 @@
 /*   By: tandrieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/04 14:20:49 by tandrieu          #+#    #+#             */
-/*   Updated: 2015/12/22 19:56:47 by rluder           ###   ########.fr       */
+/*   Updated: 2016/01/05 15:13:36 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 typedef struct		s_list
 {
 	char			**array;
-	int				type;
+	int				index;
 	struct s_list 	*next;
 }					t_list;
 
@@ -51,4 +51,11 @@ t_list	*ft_move(t_list *list);
 t_list	*ft_move_vert(t_list *list, int x);
 t_list	*ft_move_hori(t_list *list, int x);
 t_list	*everything_is_done_in_here_WTF(char *tab);
+
+
+char	**backtracking(char **tab, t_list *list, int sqrt);
+char	**suppr_tetri(char **tab, char letter, int *value);
+char	**add_tetri(char **tab, t_list *list, int letter, int *value);
+int		can_be_put(char **tab, t_list *list, int *value);
+
 #endif

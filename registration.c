@@ -6,7 +6,7 @@
 /*   By: tandrieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 13:39:49 by tandrieu          #+#    #+#             */
-/*   Updated: 2016/01/04 17:23:35 by rluder           ###   ########.fr       */
+/*   Updated: 2016/01/05 15:07:23 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,19 @@
 
 t_list	*ft_create_elem(char **btab)
 {
-	t_list	*list;
+	t_list		*list;
+	const int	k;
 
 	list = NULL;
 	list = malloc(sizeof(t_list));
 	if (list)
 	{
 		list->array = btab;
+		list->index = k;
 		list->next = NULL;
 	}
 	free(btab);
-	write(1, "elemOK\n", 7);
+	k++;
 	return (list);
 }
 
@@ -40,7 +42,6 @@ t_list	*ft_list_insert_back(t_list *list)
 		while (list->next)
 			list = list->next;
 	}
-	write(1, "backOK\n", 7);
 	return (begin_list);
 }
 
@@ -95,7 +96,6 @@ char	**ft_fill_btab(char **btab, char *file)
 		x = 0;
 	}
 	btab[3][4] = '\0';
-	write(1, "fillOK\n", 7);
 	return (btab);
 }
 
@@ -124,10 +124,7 @@ t_list	*everything_is_done_in_here_WTF(char *file)
 {
 	t_list	*list;
 	
-	write(1, "inWTF\n", 6);
 	list = ft_move(ft_list_insert_back(ft_create_elem(ft_create_btab(file))));
-	write(1, "doneWTF\n", 8);
 	print(list);
-	write(1, "printok\n", 8);
 	return (list);
 }
