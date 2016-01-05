@@ -6,7 +6,7 @@
 /*   By: tandrieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 13:39:49 by tandrieu          #+#    #+#             */
-/*   Updated: 2015/12/22 19:49:41 by rluder           ###   ########.fr       */
+/*   Updated: 2016/01/04 17:23:35 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,15 +131,3 @@ t_list	*everything_is_done_in_here_WTF(char *file)
 	write(1, "printok\n", 8);
 	return (list);
 }
-
-
-
-
-
-
-
-
-
-
-
-

@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/16 16:30:59 by rluder            #+#    #+#             */
-/*   Updated: 2015/12/22 20:20:56 by rluder           ###   ########.fr       */
+/*   Updated: 2016/01/04 17:29:16 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,24 +77,27 @@ int					main(int argc, const char *argv[])
 	t_list	*list;
 	char	*file;
 	int		fd;
-//	int		i;
+	int		i;
 //	int		j;
 
-//	i = 0;
+	i = 0;
 	index = 0;
 	fd = open(argv[1], O_RDONLY);
 	file = get_BUFF(fd);
 	if (check_block_hori(file) == 1 && check_block_vert(file) == 1
 			&& check_tetriminos_nb(file) == 1 && ft_strlen(file) <= 546)
 	{
-		while (file[index] != '\0')
+		while (i <= (ft_strlen(file) / 21)) //file[index] != '\0')
 		{
 			write (1, "gne\n", 4);
 			write(1, &file[index], 1);
 			write(1, "\n", 1);
 			list = everything_is_done_in_here_WTF(file);
 			index = index + 21;
+			i++;
 		}
 	}
+	fd = check_tetriminos_valid(list);
+	printf("valid? %d\n", fd);
 	return (0);
 }
