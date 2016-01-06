@@ -6,7 +6,7 @@
 /*   By: tandrieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/07 13:06:26 by tandrieu          #+#    #+#             */
-/*   Updated: 2015/12/17 18:27:19 by rluder           ###   ########.fr       */
+/*   Updated: 2016/01/06 18:43:59 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int		check_block_hori(char *tab)
 	i = 0;
 	enter = 0;
 	block4 = 0;
-	write(1, "hori\n", 5);
 	while (tab[i] != '\0')
 	{
 		if (enter == 4)

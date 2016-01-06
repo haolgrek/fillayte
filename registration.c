@@ -6,44 +6,14 @@
 /*   By: tandrieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 13:39:49 by tandrieu          #+#    #+#             */
-/*   Updated: 2016/01/05 15:07:23 by rluder           ###   ########.fr       */
+/*   Updated: 2016/01/06 18:43:51 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 #include <stdio.h>
 #include <stdlib.h>
-
-t_list	*ft_create_elem(char **btab)
-{
-	t_list		*list;
-	const int	k;
-
-	list = NULL;
-	list = malloc(sizeof(t_list));
-	if (list)
-	{
-		list->array = btab;
-		list->index = k;
-		list->next = NULL;
-	}
-	free(btab);
-	k++;
-	return (list);
-}
-
-t_list	*ft_list_insert_back(t_list *list)
-{
-	t_list	*begin_list;
-
-	begin_list = list;
-	if (list)
-	{
-		while (list->next)
-			list = list->next;
-	}
-	return (begin_list);
-}
+#include "libft.h"
 
 char	**ft_create_btab(char *file)
 {
@@ -106,7 +76,6 @@ void	print(t_list *list)
 
 	i = 0;
 	j = 0;
-	list = ft_move(list);
 	while (list)
 	{
 		while (i < 4)
@@ -114,17 +83,86 @@ void	print(t_list *list)
 			printf("%s", list->array[i]);
 			i++;
 		}
-		printf("%c", '\n');
+		i = 0;
 		printf("%c", '\n');
 		list = list->next;
 	}
 }
 
-t_list	*everything_is_done_in_here_WTF(char *file)
+t_list	*create_list(char *file)
 {
 	t_list	*list;
-	
-	list = ft_move(ft_list_insert_back(ft_create_elem(ft_create_btab(file))));
-	print(list);
+	//t_list	*begin;
+	int		b;
+
+	b = 0;
+	list = NULL;
+	while (b < ((ft_strlen(file) + 1)/ 21))
+	{
+		list = ft_list_insert_back(list, file);
+		//print(list);
+	//	printf("rappelle\n");
+		//if (b == 0)
+		//{
+			//write(1, "HiiLO\n", 6);
+		//	begin = list;
+//			print(begin);
+//		}
+		b++;
+	}
+	//print(begin);
+	//write(1, "HELLO\n", 6);
+	return (list);
+}
+
+t_list	*ft_create_elem(char *file)
+{
+	t_list		*lst;
+	static int	k;
+	char		**btab;
+
+	btab = ft_create_btab(file);
+	lst = malloc(sizeof(t_list));
+	if (lst)
+	{
+		lst->array = btab;
+		lst->index = k;
+		lst->next = NULL;
+	}
+	k = k + 1;
+	return (lst);
+}
+
+t_list	*ft_list_insert_back(t_list *list, char *file)
+{
+	t_list	*tmp;
+	t_list	*tmp2;
+
+	tmp = ft_create_elem(file);
+	if (tmp)
+	{
+		if (list)
+		{
+		//	printf("second appel\n");
+			tmp2 = list;
+			while (tmp2->next)
+			{
+			//	write(1, "BONJOUP\n", 8);
+				tmp2 = tmp2->next;
+			}
+		//	write(1, "BONJOUm\n", 8);
+			tmp2->next = tmp;
+		//	write(1, "BONJOUO\n", 8);
+		}
+		else
+		{
+			list = tmp;
+	//		print(list);
+	//		printf("premier appel\n");
+		}
+	}
+	//print(list);
+	//print(list->next);
+//	write(1, "BYNJOUR\n", 8);
 	return (list);
 }
