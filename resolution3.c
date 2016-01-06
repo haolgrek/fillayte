@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   resolution2.c                                       :+:      :+:    :+:  */
+/*   resolution.c                                        :+:      :+:    :+:  */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tandrieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/12 17:34:56 by tandrieu          #+#    #+#             */
-/*   Updated: 2016/01/05 15:34:48 by rluder           ###   ########.fr       */
+/*   Updated: 2016/01/06 10:43:53 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include "libft.h"
 
-char	**fill_tab_w_point(char **ftab, int sqrt_calc)
+char	**fill_tab_w_point(char **ftab, int sqrt)
 {
 	int		i;
 	int		j;
 
 	i = 0;
-	printf("%d\n", sqrt_calc);
-	while (i < 2)
+	while (i < sqrt)
 	{
 		j = 0;
-		while (j < 2)
+		while (j < sqrt)
 		{
 			ftab[i][j] = '.';
 			j++;
@@ -35,22 +35,44 @@ char	**fill_tab_w_point(char **ftab, int sqrt_calc)
 	return (ftab);
 }
 
-char	**create_final_tab(char *tab)
+char	**create_final_tab(char *tab, int sqrt)
 {
 	char	**ftab;
 	int		i;
-	int		sqrt_calc;
 	static int k;
 
-	i = strlen(tab) / 21;
-	sqrt_calc = sqrt(ft_strlen(tab) / 21);
-	if (i != 4 && i != 9 && i != 16 && i != 25 && i != 36 && i != 49 &&
-			i != 64 && i != 81 && i  != 100)
-		sqrt_calc += 1;
-	ftab = malloc(sizeof(char*) * sqrt_calc + k);
 	i = 0 ;
-	while (i < sqrt_calc + k)
-		ftab[i++] = malloc(sizeof(char) * sqrt_calc + k);
+	ftab = malloc(sizeof(char*) * (sqrt + k));
+	while (i < sqrt + k)
+		ftab[i++] = malloc(sizeof(char) * (sqrt + k));
 	k++;
+	ftab = fill_tab_w_point(ftab, sqrt);
+	print_tab(ftab, sqrt);
 	return (ftab);
+}
+
+void	print_tab(char **tab, int sqrt)
+{
+	int		i;
+
+	i = 0;
+	while (i < sqrt)
+	{
+		printf("%s\n", tab[i]);
+		i++;
+	}
+}
+
+char	**solve(t_list *list, char *file)
+{
+	char	**tab;
+	int		sqrt;
+
+
+	sqrt = (strlen(tab) + 1)/ 21;
+	if (sqrt != 4 && sqrt != 9 && sqrt != 16 && sqrt != 25 && sqrt != 36 && sqrt != 49 && sqrt != 64 && sqrt != 81 && sqrt != 100)
+		sqrt += 1;
+	tab = create_final_tab(file, sqrt);
+	backtracking(tab, list, sqrt);
+	print_tab(tab, sqrt);
 }

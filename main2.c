@@ -6,42 +6,15 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/16 16:30:59 by rluder            #+#    #+#             */
-/*   Updated: 2016/01/04 17:29:16 by rluder           ###   ########.fr       */
+/*   Updated: 2016/01/05 15:52:59 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
 #include "list.h"
 #include "libft.h"
 #include <stdio.h>
 #include <fcntl.h>
 #include <stdlib.h>
-
-/*t_list				*ft_create_list(char **tab, t_list *list)
-{
-	char	**btab;
-	int		x;
-
-	x = 0;
-	btab = malloc(sizeof(char) * 5);
-	write (1, "creat1\n", 7);
-	list = 0;
-	write (1, "creat2\n", 7);
-	while (x < 4)
-	{
-		write (1, "creat3\n", 7);
-		btab[x] = malloc(sizeof(char) * 5);
-		x++;
-	}
-	write (1, "creat4\n", 7);
-	btab = ft_fill_btab(btab, tab);
-	write (1, "creat5\n", 7);
-	list = ft_list_insert_back(ft_create_elem(btab, list));
-	write (1, "creat6\n", 7);
-	free (btab);
-	write (1, "creat7\n", 7);
-	return (list);
-}*/
 
 static char			*ft_nofile(int const fd, char *file, char *buf)
 {
@@ -70,7 +43,7 @@ char				*get_BUFF(int const fd)
 	return (file);
 }
 
-int					main(int argc, const char *argv[])
+int					han_shot_first(char **argv)
 {
 	int		index;
 	char	**tab;
@@ -78,7 +51,6 @@ int					main(int argc, const char *argv[])
 	char	*file;
 	int		fd;
 	int		i;
-//	int		j;
 
 	i = 0;
 	index = 0;
@@ -87,17 +59,32 @@ int					main(int argc, const char *argv[])
 	if (check_block_hori(file) == 1 && check_block_vert(file) == 1
 			&& check_tetriminos_nb(file) == 1 && ft_strlen(file) <= 546)
 	{
-		while (i <= (ft_strlen(file) / 21)) //file[index] != '\0')
+		while (i <= (ft_strlen(file) / 21))
 		{
-			write (1, "gne\n", 4);
-			write(1, &file[index], 1);
-			write(1, "\n", 1);
 			list = everything_is_done_in_here_WTF(file);
 			index = index + 21;
+			if (check_tetriminos_valid(list) == 0)
+				return (0);
 			i++;
 		}
 	}
+	else
+		return (0);
 	fd = check_tetriminos_valid(list);
 	printf("valid? %d\n", fd);
-	return (0);
+	return (1);
+}
+
+int		main(int argc, char **argv)
+{
+	if (argc != 2)
+		return (0);
+	else
+	{
+		if (han_shot_first(argv) == 1)
+		{
+		}
+		else
+			printf("%s\n", "block error");
+	}
 }

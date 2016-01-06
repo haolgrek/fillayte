@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/05 13:24:07 by rluder            #+#    #+#             */
-/*   Updated: 2016/01/05 15:26:08 by rluder           ###   ########.fr       */
+/*   Updated: 2016/01/05 15:33:19 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ char	**backtracking(char **tab, t_list *list, int sqrt)
 	{
 		if (can_be_put(tab, list, value))
 		{
-			letter = 'A' + list->index; //ajouter int dans struct
+			letter = 'A' + list->index;
 			tab = add_tetri(tab, list, letter, value);
 			if (backtracking(tab, list->next, sqrt))
 				return (tab);
