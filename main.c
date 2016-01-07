@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/16 16:30:59 by rluder            #+#    #+#             */
-/*   Updated: 2016/01/07 17:20:08 by rluder           ###   ########.fr       */
+/*   Updated: 2016/01/07 17:55:09 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static char		*ft_nofile(int const fd, char *file, char *buf)
 
 	while ((ret = read(fd, buf, BUFF_SIZE)))
 	{
-		buf[ret] = '\0';
+		buf[ret] = '\n';
+		buf[ret + 1] = '\0';
 		if (!file)
 			file = ft_strdup(buf);
 		else
@@ -63,6 +64,8 @@ int				han_shot_first(char **argv)
 	if (check_block_hori(file) == 1 && check_block_vert(file) == 1
 			&& check_tetriminos_nb(file) == 1 && ft_strlen(file) <= 546)
 	{
+		printf("%d\n", check_block_hori(file));
+		printf("%d\n", check_block_vert(file));
 		if (check_tetriminos_valid(list) == 0)
 			return (0);
 	}

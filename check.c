@@ -6,7 +6,7 @@
 /*   By: tandrieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/07 13:06:26 by tandrieu          #+#    #+#             */
-/*   Updated: 2016/01/07 16:45:26 by rluder           ###   ########.fr       */
+/*   Updated: 2016/01/07 18:13:55 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ int		check_tetriminos_valid2(t_list *list, char *buf, int *value)
 			value[3]++;
 			value[0]++;
 			value[1] = 0;
+			printf("%d\n", value[4]);
 		}
 		if (value[4] == 19)
 			return (1);
@@ -138,7 +139,9 @@ int		check_tetriminos_valid(t_list *list)
 	while (list)
 	{
 		if (check_tetriminos_valid2(list, buf, value) == 1)
+		{
 			list = list->next;
+		}
 		else
 			return (0);
 	}
