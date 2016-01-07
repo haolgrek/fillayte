@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/05 13:24:07 by rluder            #+#    #+#             */
-/*   Updated: 2016/01/06 13:11:17 by rluder           ###   ########.fr       */
+/*   Updated: 2016/01/07 11:41:18 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,18 @@ int		can_be_put(char **tab, t_list *list, int *value)
 	i = 0;
 	j = 0;
 	count = 0;
-//	write (1,"cbp1\n", 5);
 	if (!list)
 		return(0);
 	while ((i < 4) && (value[0] + i) < value[2] && count < 4)
 	{
-//		write (1,"cbp2\n", 5);
 		j = 0;
 		while ((j < 4) && (value[1] + j) < value[2] && count < 4)
 		{
-//			write (1,"cbp3\n", 5);
 			if (tab[value[0] + i][value[1] + j] != '.' && list->array[i][j] != '.')
 				return (0);
-//			write (1,"cbp4\n", 5);
 			if (tab[value[0] + i][value[1] + j] == '.' && list->array[i][j] != '.')
-			{
 				count++;
-//				printf("count %d\n", count);
-			}
 			j++;
-//			printf("pute\n");
 		}
 		i++;
 	}
@@ -97,36 +89,24 @@ char	**backtracking(char **tab, t_list *list, int sqrt)
 	value[1] = 0;
 	value[2] = sqrt;
 
-//	write (1, "inbc\n", 5);
 	while (value[0] < value[2])
 	{
-//		write (1, "inwh\n", 5);
 		if (can_be_put(tab, list, value))
 		{
-//			write (1, "inif\n", 5);
 			letter = 'A' + list->index;
-//			printf("hello darkness\n");
-//			print(list);
 			tab = add_tetri(tab, list, letter, value);
-			print_tab(tab, value[2]);
-			printf("\n");
 			if (backtracking(tab, list->next, sqrt))
-			{
-				printf("hel\n");
 				return (tab);
-			}
+			if (!list->next)
+				return (tab);
 			tab = suppr_tetri(tab, letter, value);
 		}
-//		printf("hel\n");
 		value[1]++;
 		if (value[1] >= value[2])
 		{
 			value[1] = 0;
 			value[0]++;
 		}
-//		printf("value[0] %d\n", value[0]);
-//		printf("value[1] %d\n", value[1]);
 	}
 	return (NULL);
 }
-

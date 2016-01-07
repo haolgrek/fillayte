@@ -6,7 +6,7 @@
 /*   By: tandrieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/12 17:34:56 by tandrieu          #+#    #+#             */
-/*   Updated: 2016/01/06 13:10:30 by rluder           ###   ########.fr       */
+/*   Updated: 2016/01/07 11:45:42 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,12 @@ char	**create_final_tab(char *tab, int sqrt)
 {
 	char	**ftab;
 	int		i;
-	static int k;
 
 	i = 0 ;
-	ftab = malloc(sizeof(char*) * (sqrt + k));
-	while (i < sqrt + k)
-		ftab[i++] = malloc(sizeof(char) * (sqrt + k));
-	k++;
+	ftab = malloc(sizeof(char*) * (sqrt));
+	while (i < sqrt)
+		ftab[i++] = malloc(sizeof(char) * (sqrt));
 	ftab = fill_tab_w_point(ftab, sqrt);
-	print_tab(ftab, sqrt);
 	return (ftab);
 }
 
@@ -56,9 +53,10 @@ void	print_tab(char **tab, int sqrt)
 	int		i;
 
 	i = 0;
-	while (i < sqrt)
+	while (i < (sqrt - 1))
 	{
-		printf("%s\n", tab[i]);
+		ft_putstr(tab[i]);
+		ft_putchar('\n');
 		i++;
 	}
 }
@@ -66,15 +64,18 @@ void	print_tab(char **tab, int sqrt)
 char	**solve(t_list *list, char *file)
 {
 	char	**tab;
-	int		sqrt;
-	sqrt = (strlen(file) + 1)/ 21;
-	if (sqrt != 4 && sqrt != 9 && sqrt != 16 && sqrt != 25 && sqrt != 36 && sqrt != 49 && sqrt != 64 && sqrt != 81 && sqrt != 100)
-		sqrt += 1;
-	tab = create_final_tab(file, sqrt);
-	//write (1, "teub\n", 5);
-	printf("__Before Backtracking__\n");
-	tab = backtracking(tab, list, sqrt);
-	printf("__After Backtracking__\n");
-	print_tab(tab, sqrt);
+	int		sqrt1;
+
+	tab = NULL;
+	sqrt1 = sqrt(((strlen(file) + 1) / 21) * 4);
+	if (sqrt1 != 2 && sqrt1 != 4 && sqrt1 != 9 && sqrt1 != 16 && sqrt1 != 25 && sqrt1 != 36 && sqrt1 != 49 && sqrt1 != 64 && sqrt1 != 81 && sqrt1 != 100)
+		sqrt1 += 1;
+	while (tab == NULL)
+	{
+		tab = create_final_tab(file, sqrt1);
+		tab = backtracking(tab, list, sqrt1);
+		sqrt1++;
+	}
+	print_tab(tab, sqrt1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/16 16:30:59 by rluder            #+#    #+#             */
-/*   Updated: 2016/01/06 18:38:02 by rluder           ###   ########.fr       */
+/*   Updated: 2016/01/07 12:12:46 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,15 @@ static char			*ft_nofile(int const fd, char *file, char *buf)
 
 	while ((ret = read(fd, buf, BUFF_SIZE)))
 	{
+		write(1, "while", 5);
 		buf[ret] = '\0';
 		if (!file)
+		{
+			write(1, "bate", 4);
 			file = ft_strdup(buf);
+		}
 		else
+			write(1, "bete", 4);
 			file = ft_strjoin(file, buf);
 	}
 	return (file);
@@ -38,8 +43,10 @@ char				*get_BUFF(int const fd)
 	static char		*file;
 
 	if (!file)
+		write(1, "bite", 4);
 		file = ft_nofile(fd, file, buf);
 	if (*file == '\0')
+		write(1, "bote", 4);
 		return (0);
 	return (file);
 }
@@ -54,8 +61,10 @@ int					han_shot_first(char **argv)
 
 	i = 0;
 	fd = open(argv[1], O_RDONLY);
+	write(1, "bute", 4);
 	file = get_BUFF(fd);
 	close(fd);
+	write(1, "bite", 4);
 	list = create_list(file);
 	list = ft_move(list);
 	if (check_block_hori(file) == 1 && check_block_vert(file) == 1
@@ -67,7 +76,6 @@ int					han_shot_first(char **argv)
 	else
 		return (0);
 	solve(list, file);
-	write(1, "hello\n", 6);
 	return (1);
 }
 
@@ -77,11 +85,7 @@ int		main(int argc, char **argv)
 		return (0);
 	else
 	{
-		if (han_shot_first(argv) == 1)
-		{
-			printf("%s\n", "block ok");
-		}
-		else
+		if (han_shot_first(argv) == 0)
 			printf("%s\n", "error");
 	}
 }
