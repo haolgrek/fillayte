@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/05 13:24:07 by rluder            #+#    #+#             */
-/*   Updated: 2016/01/07 11:41:18 by rluder           ###   ########.fr       */
+/*   Updated: 2016/01/07 14:48:28 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,17 @@ int		can_be_put(char **tab, t_list *list, int *value)
 	j = 0;
 	count = 0;
 	if (!list)
-		return(0);
+		return (0);
 	while ((i < 4) && (value[0] + i) < value[2] && count < 4)
 	{
 		j = 0;
 		while ((j < 4) && (value[1] + j) < value[2] && count < 4)
 		{
-			if (tab[value[0] + i][value[1] + j] != '.' && list->array[i][j] != '.')
+			if (tab[value[0] + i][value[1] + j] != '.'
+					&& list->array[i][j] != '.')
 				return (0);
-			if (tab[value[0] + i][value[1] + j] == '.' && list->array[i][j] != '.')
+			if (tab[value[0] + i][value[1] + j] == '.'
+					&& list->array[i][j] != '.')
 				count++;
 			j++;
 		}
@@ -43,7 +45,7 @@ int		can_be_put(char **tab, t_list *list, int *value)
 char	**add_tetri(char **tab, t_list *list, int letter, int *value)
 {
 	int		i;
-	int 	j;
+	int		j;
 
 	i = 0;
 	while ((i < 4) && (value[0] + i) < value[2])
@@ -51,7 +53,8 @@ char	**add_tetri(char **tab, t_list *list, int letter, int *value)
 		j = 0;
 		while ((j < 4) && (value[1] + j) < value[2])
 		{
-			if (tab[value[0] + i][value[1] + j] == '.' && list->array[i][j] != '.')
+			if (tab[value[0] + i][value[1] + j] == '.'
+					&& list->array[i][j] != '.')
 				tab[value[0] + i][value[1] + j] = letter;
 			j++;
 		}
@@ -81,21 +84,20 @@ char	**suppr_tetri(char **tab, char letter, int *value)
 	return (tab);
 }
 
-char	**backtracking(char **tab, t_list *list, int sqrt)
+char	**backtracking(char **tab, t_list *list, int sqrt, char letter)
 {
-	char	letter;
 	int		value[3];
+
 	value[0] = 0;
 	value[1] = 0;
 	value[2] = sqrt;
-
 	while (value[0] < value[2])
 	{
 		if (can_be_put(tab, list, value))
 		{
 			letter = 'A' + list->index;
 			tab = add_tetri(tab, list, letter, value);
-			if (backtracking(tab, list->next, sqrt))
+			if (backtracking(tab, list->next, sqrt, letter))
 				return (tab);
 			if (!list->next)
 				return (tab);

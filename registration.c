@@ -6,7 +6,7 @@
 /*   By: tandrieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 13:39:49 by tandrieu          #+#    #+#             */
-/*   Updated: 2016/01/06 18:43:51 by rluder           ###   ########.fr       */
+/*   Updated: 2016/01/07 17:12:51 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,11 @@ char	**ft_create_btab(char *file)
 {
 	char	**btab;
 	int		x;
+	int		value[3];
 
+	value[0] = 0;
+	value[1] = 0;
+	value[2] = 0;
 	btab = malloc(sizeof(char*) * 4);
 	if (!btab)
 	{
@@ -30,64 +34,37 @@ char	**ft_create_btab(char *file)
 	{
 		btab[x++] = malloc(sizeof(char) * 5);
 	}
-	btab = ft_fill_btab(btab, file);
+	btab = ft_fill_btab(btab, file, value);
 	return (btab);
 }
 
-char	**ft_fill_btab(char **btab, char *file)
+char	**ft_fill_btab(char **btab, char *file, int *value)
 {
-	int			x;
-	int			y;
-	int			j;
 	static int	i;
 
 	if (i == 0)
 		i = -1;
 	if (i != 0)
 		i++;
-	j = 0;
-	x = 0;
-	y = 0;
-	while (j < 4)
+	while (value[2] < 4)
 	{
-		while (y < 4)
+		while (value[1] < 4)
 		{
-			while (x < 5)
+			while (value[0] < 5)
 			{
-				btab[y][x] = file[i];
-				x++;
+				btab[value[1]][value[0]] = file[i];
+				value[0]++;
 				i++;
 			}
-			j++;
-			y++;
-			x = 0;
+			value[2]++;
+			value[1]++;
+			value[0] = 0;
 		}
-		y = 0;
-		x = 0;
+		value[1] = 0;
+		value[0] = 0;
 	}
 	btab[3][4] = '\0';
 	return (btab);
-}
-
-void	print(t_list *list)
-{
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	while (list)
-	{
-		while (i < 4)
-		{
-			printf("%s", list->array[i]);
-			i++;
-		}
-		i = 0;
-		printf("%c", '\n');
-		printf("%c", '\n');
-		list = list->next;
-	}
 }
 
 t_list	*create_list(char *file)
@@ -97,7 +74,7 @@ t_list	*create_list(char *file)
 
 	b = 0;
 	list = NULL;
-	while (b < ((ft_strlen(file) + 1)/ 21))
+	while (b < (((int)ft_strlen(file) + 1) / 21))
 	{
 		list = ft_list_insert_back(list, file);
 		b++;

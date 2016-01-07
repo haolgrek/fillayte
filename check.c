@@ -6,7 +6,7 @@
 /*   By: tandrieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/07 13:06:26 by tandrieu          #+#    #+#             */
-/*   Updated: 2016/01/06 18:43:59 by rluder           ###   ########.fr       */
+/*   Updated: 2016/01/07 16:45:26 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,40 +93,29 @@ int		check_tetriminos_nb(char *tab)
 	return (1);
 }
 
-int		check_tetriminos_valid2(t_list *list, char *buf)
+int		check_tetriminos_valid2(t_list *list, char *buf, int *value)
 {
-	int		i;
-	int		j;
-	int		k;
-	int		enter;
-	int		count;
-
-	i = 0;
-	j = 0;
-	k = 0;
-	count = 0;
-	enter = 0;
-	while (buf[k] != '\0')
+	while (buf[value[2]] != '\0')
 	{
-		while (enter < 4)
+		value[0] = 0;
+		value[1] = 0;
+		while (value[3] < 4)
 		{
-			while (j < 5)
+			while (value[1] < 5)
 			{
-				if (list->array[i][j] == buf[k])
-					count++;
-				j++;
-				k++;
+				if (list->array[value[0]][value[1]] == buf[value[2]])
+					value[4]++;
+				value[1]++;
+				value[2]++;
 			}
-			enter++;
-			i++;
-			j = 0;
+			value[3]++;
+			value[0]++;
+			value[1] = 0;
 		}
-		if (count == 19)
+		if (value[4] == 19)
 			return (1);
-		count = 0;
-		enter = 0;
-		i = 0;
-		j = 0;
+		value[4] = 0;
+		value[3] = 0;
 	}
 	return (0);
 }
@@ -136,7 +125,11 @@ int		check_tetriminos_valid(t_list *list)
 	int		fd;
 	int		ret;
 	char	buf[400];
+	int		value[5];
 
+	value[2] = 0;
+	value[3] = 0;
+	value[4] = 0;
 	fd = open("tetriminos_valid.tetriminos", O_RDONLY);
 	if (fd == -1)
 		return (0);
@@ -144,7 +137,7 @@ int		check_tetriminos_valid(t_list *list)
 	close(fd);
 	while (list)
 	{
-		if (check_tetriminos_valid2(list, buf) == 1)
+		if (check_tetriminos_valid2(list, buf, value) == 1)
 			list = list->next;
 		else
 			return (0);

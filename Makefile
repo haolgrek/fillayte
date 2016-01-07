@@ -6,29 +6,40 @@
 #    By: tandrieu <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/02 18:31:57 by tandrieu          #+#    #+#              #
-#    Updated: 2015/12/08 15:30:57 by tandrieu         ###   ########.fr        #
+#    Updated: 2016/01/07 17:16:41 by rluder           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = fillit
-CC = gcc 
-CFLAGS = -Wall -Werror -Wextra
-SRC = main.c \
-	  check_block.c \
+OBJET_NAME = $(SRC_NAME:.c=.o)
+	CC = gcc
+	EXE = fillit
+	LIBRARY = libfillit.a
+	MAIN = main.o
+	CFLAGS = -Werror -Wextra -Werror 
+	SRC_NAME = backtracking.c\
+				check.c\
+				registration.c\
+				resolution.c\
+				set_left_up.c
 
-OBJECT = $(SRC:.c=.o)
+all : $(EXE)
 
-$(NAME):
-	$(CC) $(CFLAGS) -c $(SRC)
-	ar rc $(NAME) $(OBJECT)
-	ranlib $(NAME)
+$(EXE) : $(LIBRARY) $(MAIN)
+		gcc -o fillit $(CFLAGS) $(MAIN) $(LIBRARY) libft.a
 
-all: $(NAME)
+$(LIBRARY) : $(OBJET_NAME)
+		ar -r $(LIBRARY) $(OBJET_NAME)
 
-clean:
-	rm -rf $(OBJECT)
+$(MAIN) : main.c
+		$(CC) $(CFLAGS) -c $<
 
-fclean: clean
-	rm -rf $(NAME)
+%.o : %.c
+		$(CC) -c $(CFLAGS) $<
 
-re: fclean all
+clean :
+		rm $(SRC_NAME:.c=.o) main.o
+
+fclean : clean
+		rm -rf $(LIBRARY) $(EXE)
+
+re : fclean all
