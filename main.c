@@ -47,40 +47,27 @@ char				*get_BUFF(int const fd)
 int					han_shot_first(char **argv)
 {
 	t_list	*list;
+	t_list	*tempo;
 	char	*file;
 	int		fd;
 	int		i;
-	t_list *begin;
 
 	i = 0;
 	fd = open(argv[1], O_RDONLY);
 	file = get_BUFF(fd);
+	close(fd);
 	list = create_list(file);
-	print(list);
-	begin = list;
+	list = ft_move(list);
 	if (check_block_hori(file) == 1 && check_block_vert(file) == 1
 			&& check_tetriminos_nb(file) == 1 && ft_strlen(file) <= 546)
 	{
-	//	write(1, "HALLO\n", 6);
 		if (check_tetriminos_valid(list) == 0)
-		{
-		//	write(1, "HMLLO\n", 6);
 			return (0);
-		}
-		else
-		{
-//			write(1, "HPLLO\n", 6);
-		//	print(list);
-			list = list->next;
-	//		write(1, "HPLLO\n", 6);
-		}
-		i++;
 	}
 	else
 		return (0);
-//	write(1, "HILLO\n", 6);
-	//print(begin);
-	solve(begin, file);
+	solve(list, file);
+	write(1, "hello\n", 6);
 	return (1);
 }
 
@@ -95,6 +82,6 @@ int		main(int argc, char **argv)
 			printf("%s\n", "block ok");
 		}
 		else
-			printf("%s\n", "block error");
+			printf("%s\n", "error");
 	}
 }

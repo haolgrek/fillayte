@@ -67,13 +67,14 @@ char	**solve(t_list *list, char *file)
 {
 	char	**tab;
 	int		sqrt;
-
 	sqrt = (strlen(file) + 1)/ 21;
 	if (sqrt != 4 && sqrt != 9 && sqrt != 16 && sqrt != 25 && sqrt != 36 && sqrt != 49 && sqrt != 64 && sqrt != 81 && sqrt != 100)
 		sqrt += 1;
 	tab = create_final_tab(file, sqrt);
 	//write (1, "teub\n", 5);
+	printf("__Before Backtracking__\n");
 	tab = backtracking(tab, list, sqrt);
+	printf("__After Backtracking__\n");
 	print_tab(tab, sqrt);
 	return (0);
 }

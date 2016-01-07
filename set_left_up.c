@@ -22,22 +22,16 @@ int		ft_count_hori(t_list *list)
 	i = 0;
 	j = 0;
 	x = 4;
-	while (list)
+	while (i < 4)
 	{
-		while (i < 4)
-		{
-			while (list->array[i][j] != '#' && j < 5)
-				j++;
-			if (j < x)
-				x = j;
-			j = 0;
-			i++;
-		}
-		return (x);
-		x = 4;
-		list = list->next;
+		while (list->array[i][j] != '#' && j < 5)
+			j++;
+		if (j < x)
+			x = j;
+		j = 0;
+		i++;
 	}
-	return (0);
+	return (x);
 }
 
 int		ft_count_vert(t_list *list)
@@ -49,23 +43,18 @@ int		ft_count_vert(t_list *list)
 	i = 0;
 	j = 0;
 	y = 0;
-	while (list)
+	while (i < 4)
 	{
-		while (i < 4)
-		{
-			while (list->array[i][j] != '#' && j < 5)
-				j++;
-			if (j == 5)
-				y++;
-			else
-				return (y);
-			j = 0;
-			i++;
-		}
-		y = 4;
-		list = list->next;
+		while (list->array[i][j] != '#' && j < 5)
+			j++;
+		if (j == 5)
+			y++;
+		else
+			return(y);
+		j = 0;
+		i++;
 	}
-	return (0);
+	return (y);
 }
 
 t_list	*ft_move(t_list *list)
@@ -79,15 +68,15 @@ t_list	*ft_move(t_list *list)
 	begin = list;
 	i = 0;
 	j = 0;
-	x = ft_count_hori(list);
-	y = ft_count_vert(list);
-	while (list)
+	while (begin)
 	{
-		ft_move_vert(list, y);
-		ft_move_hori(list, x);
-		list = list->next;
+		x = ft_count_hori(begin);
+		y = ft_count_vert(begin);
+		ft_move_vert(begin, y);
+		ft_move_hori(begin, x);
+		begin = begin->next;
 	}
-	return (begin);
+	return (list);
 }
 
 t_list	*ft_move_hori(t_list *list, int x)
@@ -111,7 +100,7 @@ t_list	*ft_move_hori(t_list *list, int x)
 			i++;
 		}
 		i = 0;
-	 	x--;
+		x--;
 	}
 	return (list);
 }

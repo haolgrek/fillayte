@@ -85,6 +85,7 @@ void	print(t_list *list)
 		}
 		i = 0;
 		printf("%c", '\n');
+		printf("%c", '\n');
 		list = list->next;
 	}
 }
@@ -92,7 +93,6 @@ void	print(t_list *list)
 t_list	*create_list(char *file)
 {
 	t_list	*list;
-	//t_list	*begin;
 	int		b;
 
 	b = 0;
@@ -100,18 +100,8 @@ t_list	*create_list(char *file)
 	while (b < ((ft_strlen(file) + 1)/ 21))
 	{
 		list = ft_list_insert_back(list, file);
-		//print(list);
-	//	printf("rappelle\n");
-		//if (b == 0)
-		//{
-			//write(1, "HiiLO\n", 6);
-		//	begin = list;
-//			print(begin);
-//		}
 		b++;
 	}
-	//print(begin);
-	//write(1, "HELLO\n", 6);
 	return (list);
 }
 
@@ -143,26 +133,13 @@ t_list	*ft_list_insert_back(t_list *list, char *file)
 	{
 		if (list)
 		{
-		//	printf("second appel\n");
 			tmp2 = list;
 			while (tmp2->next)
-			{
-			//	write(1, "BONJOUP\n", 8);
 				tmp2 = tmp2->next;
-			}
-		//	write(1, "BONJOUm\n", 8);
 			tmp2->next = tmp;
-		//	write(1, "BONJOUO\n", 8);
 		}
 		else
-		{
 			list = tmp;
-	//		print(list);
-	//		printf("premier appel\n");
-		}
 	}
-	//print(list);
-	//print(list->next);
-//	write(1, "BYNJOUR\n", 8);
 	return (list);
 }
