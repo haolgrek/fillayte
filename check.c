@@ -6,13 +6,14 @@
 /*   By: tandrieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/07 13:06:26 by tandrieu          #+#    #+#             */
-/*   Updated: 2016/01/08 17:15:42 by rluder           ###   ########.fr       */
+/*   Updated: 2016/01/08 19:37:34 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "libft.h"
 
 int		check_block_hori(char *tab)
 {
@@ -93,61 +94,37 @@ int		check_tetriminos_nb(char *tab)
 	return (1);
 }
 
-/*int		check_tetriminos_valid2(t_list *list, char *buf, int *value)
-{
-	printf("%s", buf);
-	while (buf[value[2]] != '\0')
-	{
-		value[0] = 0;
-		value[4] = 0;
-		while (value[4] < 4)
-		{
-			value[1] = 0;
-			while (value[1] < 5)
-			{
-				if (list->array[value[0]][value[1]] == buf[value[2]])
-					value[3]++;
-				value[1]++;
-				value[2]++;
-			}
-			value[4]++;
-			value[0]++;
-		}
-		printf("compteur = %d\n", value[3]);
-		if (value[3] == 19)
-		{
-			return (1);
-		}
-		value[3] = 0;
-	}
-	return (0);
-}*/
-
 int		check_tetriminos_valid2(t_list *list, char *buf, int *value)
 {
-	while (buf[value[2]] != '\0')
+	int		k;
+	char	tetri[17];
+
+	k = 0;
+	value[0] = 0;
+	tetri[0] = list->array[0][0];
+	tetri[1] = list->array[0][1];
+	tetri[2] = list->array[0][2];
+	tetri[3] = list->array[0][3];
+	tetri[4] = list->array[1][0];
+	tetri[5] = list->array[1][1];
+	tetri[6] = list->array[1][2];
+	tetri[7] = list->array[1][3];
+	tetri[8] = list->array[2][0];
+	tetri[9] = list->array[2][1];
+	tetri[10] = list->array[2][2];
+	tetri[11] = list->array[2][3];
+	tetri[12] = list->array[3][0];
+	tetri[13] = list->array[3][1];
+	tetri[14] = list->array[3][2];
+	tetri[15] = list->array[3][3];
+	tetri[16] = '\0';
+	while (k != 19)
 	{
-		while (value[0] < 4)
-		{
-			value[1] = 0;
-			while (list->array[value[0]][value[1]] == buf[value[2]] && value[1] < 4)
-			{
-				value[3]++;
-				value[2]++;
-				value[1]++;
-			}
-			value[0]++;
-		//	printf("value 0 %d\n", value[0]);
-		//	printf("value 1 %d\n", value[1]);
-			if (value[0] == 4 && value[1] == 4)
-			{
-				printf("Tetriminos ok");
-				return (1);
-			}
-		}
-		value[0] = 0;
-		value[2] = value[2] + 16 - value[3] + 1;
-		value[3] = 0;
+		if (!ft_strncmp(buf, tetri, 16))
+			return (1);
+		else
+			buf = buf + 16;
+		k++;
 	}
 	return (0);
 }
@@ -175,7 +152,6 @@ int		check_tetriminos_valid(t_list *list)
 		if (check_tetriminos_valid2(list, buf, value) == 1)
 		{
 			list = list->next;
-			printf("%d\n", i);
 			i++;
 		}
 		else
