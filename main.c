@@ -6,7 +6,7 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/16 16:30:59 by rluder            #+#    #+#             */
-/*   Updated: 2016/01/07 17:55:09 by rluder           ###   ########.fr       */
+/*   Updated: 2016/01/08 16:33:34 by rluder           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ int				han_shot_first(char **argv)
 	if (check_block_hori(file) == 1 && check_block_vert(file) == 1
 			&& check_tetriminos_nb(file) == 1 && ft_strlen(file) <= 546)
 	{
-		printf("%d\n", check_block_hori(file));
-		printf("%d\n", check_block_vert(file));
 		if (check_tetriminos_valid(list) == 0)
 			return (0);
 	}
