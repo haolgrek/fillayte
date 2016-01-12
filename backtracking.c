@@ -6,12 +6,11 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/05 13:24:07 by rluder            #+#    #+#             */
-/*   Updated: 2016/01/07 14:48:28 by rluder           ###   ########.fr       */
+/*   Updated: 2016/01/11 15:25:49 by tandrieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
-#include <stdio.h>
 
 int		can_be_put(char **tab, t_list *list, int *value)
 {
@@ -111,4 +110,20 @@ char	**backtracking(char **tab, t_list *list, int sqrt, char letter)
 		}
 	}
 	return (NULL);
+}
+
+int		check_tetriminos_valid3(char *buf, char *tetri)
+{
+	int		i;
+
+	i = 0;
+	while (i != 19)
+	{
+		if (!ft_strncmp(buf, tetri, 16))
+			return (1);
+		else
+			buf = buf + 16;
+		i++;
+	}
+	return (0);
 }

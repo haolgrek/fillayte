@@ -6,16 +6,11 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/16 16:30:59 by rluder            #+#    #+#             */
-/*   Updated: 2016/01/08 16:33:34 by rluder           ###   ########.fr       */
+/*   Updated: 2016/01/11 15:25:56 by tandrieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
-#include "libft.h"
-#include <stdio.h>
-#include <fcntl.h>
-#include <stdlib.h>
-#include <unistd.h>
 
 static char		*ft_nofile(int const fd, char *file, char *buf)
 {
@@ -29,6 +24,8 @@ static char		*ft_nofile(int const fd, char *file, char *buf)
 			file = ft_strdup(buf);
 		else
 			file = ft_strjoin(file, buf);
+		if (ret == -1)
+			return (0);
 	}
 	return (file);
 }
@@ -48,7 +45,6 @@ char			*get_buff(int const fd)
 int				han_shot_first(char **argv)
 {
 	t_list	*list;
-	t_list	*tempo;
 	char	*file;
 	int		fd;
 	int		i;
@@ -76,7 +72,10 @@ int				han_shot_first(char **argv)
 int				main(int argc, char **argv)
 {
 	if (argc != 2)
+	{
+		ft_putstr("error\n");
 		return (0);
+	}
 	else
 	{
 		if (han_shot_first(argv) == 0)

@@ -6,14 +6,11 @@
 /*   By: tandrieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 13:39:49 by tandrieu          #+#    #+#             */
-/*   Updated: 2016/01/08 16:31:16 by rluder           ###   ########.fr       */
+/*   Updated: 2016/01/11 15:25:59 by tandrieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include "libft.h"
 
 char	**ft_create_btab(char *file)
 {

@@ -6,12 +6,11 @@
 /*   By: tandrieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/10 14:56:46 by tandrieu          #+#    #+#             */
-/*   Updated: 2016/01/07 14:50:51 by rluder           ###   ########.fr       */
+/*   Updated: 2016/01/11 15:26:06 by tandrieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
-#include <stdio.h>
 
 int		ft_count_hori(t_list *list)
 {

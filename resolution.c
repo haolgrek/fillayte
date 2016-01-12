@@ -6,15 +6,11 @@
 /*   By: rluder <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/07 14:49:47 by rluder            #+#    #+#             */
-/*   Updated: 2016/01/07 17:14:18 by rluder           ###   ########.fr       */
+/*   Updated: 2016/01/11 15:26:02 by tandrieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
-#include <math.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include "libft.h"
 
 char	**fill_tab_w_point(char **ftab, int sqrt)
 {
@@ -68,7 +64,7 @@ char	**solve(t_list *list, char *file)
 	char	letter;
 
 	tab = NULL;
-	sqrt1 = sqrt(((strlen(file) + 1) / 21) * 4);
+	sqrt1 = sqrt(((ft_strlen(file) + 1) / 21) * 4);
 	if (sqrt1 != 2 && sqrt1 != 4 && sqrt1 != 9 && sqrt1 != 16 && sqrt1 != 25
 			&& sqrt1 != 36 && sqrt1 != 49 && sqrt1 != 64 && sqrt1 != 81
 			&& sqrt1 != 100)

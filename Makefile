@@ -6,7 +6,7 @@
 #    By: tandrieu <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/02 18:31:57 by tandrieu          #+#    #+#              #
-#    Updated: 2016/01/07 17:16:41 by rluder           ###   ########.fr        #
+#    Updated: 2016/01/11 15:42:46 by tandrieu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,9 @@ OBJET_NAME = $(SRC_NAME:.c=.o)
 	CC = gcc
 	EXE = fillit
 	LIBRARY = libfillit.a
+	MAKELIB = make -C ./libft
+	CLEANLIB = make clean -C ./libft
+	FCLEANLIB = make fclean -C ./libft
 	MAIN = main.o
 	CFLAGS = -Werror -Wextra -Werror 
 	SRC_NAME = backtracking.c\
@@ -25,7 +28,8 @@ OBJET_NAME = $(SRC_NAME:.c=.o)
 all : $(EXE)
 
 $(EXE) : $(LIBRARY) $(MAIN)
-		gcc -o fillit $(CFLAGS) $(MAIN) $(LIBRARY) libft.a
+		$(MAKELIB)
+		$(CC) -o $(EXE) $(CFLAGS) $(MAIN) $(LIBRARY) ./libft/libft.a
 
 $(LIBRARY) : $(OBJET_NAME)
 		ar -r $(LIBRARY) $(OBJET_NAME)
@@ -37,9 +41,11 @@ $(MAIN) : main.c
 		$(CC) -c $(CFLAGS) $<
 
 clean :
-		rm $(SRC_NAME:.c=.o) main.o
+		rm -rf $(SRC_NAME:.c=.o) main.o
+		$(CLEANLIB)
 
 fclean : clean
-		rm -rf $(LIBRARY) $(EXE)
+		rm -rf $(EXE) $(LIBRARY)
+		$(FCLEANLIB)
 
 re : fclean all

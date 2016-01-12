@@ -6,7 +6,7 @@
 /*   By: tandrieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/04 14:20:49 by tandrieu          #+#    #+#             */
-/*   Updated: 2016/01/07 17:14:11 by rluder           ###   ########.fr       */
+/*   Updated: 2016/01/11 15:25:37 by tandrieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 # define LIST_H
 # include <string.h>
 # include <unistd.h>
-# include <sys/types.h> /*WATCH OUT !! CHECK EVERY FILE FOR THOSE FUCKERS*/
-# include <sys/uio.h>
+# include <stdlib.h>
+# include <math.h>
+# include "./libft/libft.h"
 # include <fcntl.h>
 
 # define BUFF_SIZE 600
@@ -34,11 +35,9 @@ char				*get_buff(int const fd);
 int					check_block_hori(char *tab);
 int					check_block_vert(char *tab);
 int					check_tetriminos_nb(char *tab);
-int					check_tetriminos_valid2(t_list *list,
-						char *buf, int *value);
+int					check_tetriminos_valid2(t_list *list, char *buf);
 int					check_tetriminos_valid(t_list *list);
 
-void				print(t_list *list);
 char				**ft_create_btab(char *file);
 char				**ft_fill_btab(char **btab, char *file, int *value);
 t_list				*ft_list_insert_back(t_list *list, char *file);
@@ -57,6 +56,7 @@ char				**suppr_tetri(char **tab, char letter, int *value);
 char				**add_tetri(char **tab, t_list *list,
 						int letter, int *value);
 int					can_be_put(char **tab, t_list *list, int *value);
+int					check_tetriminos_valid3(char *buf, char *tetri);
 
 void				print_tab(char **tab, int sqrt);
 char				**create_final_tab(int sqrt);
